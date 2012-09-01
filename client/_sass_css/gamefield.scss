@@ -26,7 +26,18 @@
   }
 
   #board {
+    position: relative;
+    width: 512px;
+    height: 768px;
+    left: 256px;
+    top: 0;
+    overflow: hidden;
 
+    .tile {
+      width: 64px;
+      height: 64px;
+      float: left;
+    }
   }
 
   .box-header {

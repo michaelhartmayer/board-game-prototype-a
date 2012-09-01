@@ -39,12 +39,8 @@
   <!-- UI: Board -->
   <div id="board"></div>
   <script id="tmpl_board" type="text/x-handlebars-template">
-    {{#each cols}}
-      <div class="col">
-      {{#each rows}}
-        <div class="col" data-ga-col="{{col}}" data-ga-row="{{row}}"></div>
-      {{/each}}
-      </div>
+    {{#each board}}
+      <div class="tile" data-c="{{c}}" data-r="{{r}}"></div>
     {{/each}}
   </script>
 </div>

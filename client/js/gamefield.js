@@ -49,15 +49,16 @@ $(function () {
   });
 
   // demo board
-  var aRows = [];
-  for (var row = 0; row < 12; row++) {
-    var aCols = [];
-    for (var col = 0; col < 8; col ++) {
-      aCols.push({row: row, col: col});
-    }
-    aRows.push({ rows: aCols });
+  var board = [];
+  for (var i = 0; i < (6 * 8 * 2); i++) {
+    board.push({
+      empty:  true,
+      c:      i - ~~(i/8) * 8,
+      r:      ~~(i/8)
+    })
   };
 
-  oGameField.updateBoard({ cols: aCols });
-  window.x ={ cols: aRows };
+  oGameField.updateBoard({
+    board: board
+  });
 });

@@ -14,6 +14,17 @@
       font-size: 0.65em; }
       #gamefield #status .t td {
         padding: 2px 5px; }
+  #gamefield #board {
+    position: relative;
+    width: 512px;
+    height: 768px;
+    left: 256px;
+    top: 0;
+    overflow: hidden; }
+    #gamefield #board .tile {
+      width: 64px;
+      height: 64px;
+      float: left; }
   #gamefield .box-header {
     padding: 5px;
     border-bottom: 1px solid #BBB;
