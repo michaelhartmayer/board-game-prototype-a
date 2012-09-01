@@ -1,0 +1,29 @@
+/* Color Theme */
+/* Mixins */
+/* Dev Modal */
+.devmodal {
+  border: 1px solid #888888;
+  padding: 10px 50px;
+  background: #cccccc;
+  display: none;
+  -webkit-box-shadow: 0px 0px 5px 0px #999999;
+  box-shadow: 0px 0px 5px 0px #999999;
+  /* Title */
+  /* Options */
+  /* Resolution */ }
+  .devmodal .title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-color: #000; }
+  .devmodal .options {
+    margin-bottom: 20px; }
+    .devmodal .options .option {
+      padding: 5px; }
+      .devmodal .options .option input {
+        margin: 3px 0;
+        padding: 2px; }
+  .devmodal .resolution {
+    text-align: center; }
+    .devmodal .resolution button {
+      padding: 10px 25px; }

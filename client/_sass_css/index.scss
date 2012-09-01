@@ -1,0 +1,16 @@
+/* Throbbers */
+.dark-bar {
+  background: {
+    image: url('../images/throbbers/dark-bar.gif');
+    position: center center;
+    repeat: no-repeat;
+  }
+}
+
+.spinner {
+  background: {
+    image: url('../images/throbbers/spinner.gif');
+    position: center center;
+    repeat: no-repeat;
+  }
+}

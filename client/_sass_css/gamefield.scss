@@ -1,0 +1,39 @@
+#gamefield {
+  width: 1024px;
+  height: 768px;
+  background: url('../images/board/background.jpg') no-repeat;
+  margin: 20px auto 0;
+  position: relative;
+
+  #status {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 224px;
+    height: 385px;
+
+    .t {
+      font-size: 0.65em;
+
+      td {
+        padding: 2px 5px;
+      }
+    }
+  }
+
+  #selection {
+
+  }
+
+  #board {
+
+  }
+
+  .box-header {
+    padding: 5px;
+    border-bottom: 1px solid #BBB;
+    font-size: 0.8em;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+}
