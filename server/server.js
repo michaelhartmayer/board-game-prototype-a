@@ -57,8 +57,6 @@ var Client = function (s) {
     if (_self.registered) {
       delete players[s.id];
     }
-
-    delete this;
   });
 
   // on: listgames
