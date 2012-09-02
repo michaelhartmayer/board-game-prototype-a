@@ -15,6 +15,9 @@
     <!-- CSS: GameField -->
     <link rel="stylesheet" type="text/css" href="css/gamefield.css" />    
 
+    <!-- JS: Node w/ Socket.io -->
+    <script src="http://localhost:8011/socket.io/socket.io.js"></script>
+
     <!-- JS: Dependencies -->
     <script type="text/javascript" src="js/lib/underscore-min.js"></script>
     <script type="text/javascript" src="js/lib/backbone-min.js"></script>

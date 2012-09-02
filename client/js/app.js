@@ -4,7 +4,7 @@ Machinespark.Application = function () {
 };
 
 Machinespark.Application.prototype.setup = function () {
-
+  this.gameserver = io.connect('http://localhost:8011');
 };
 
 /* Run */
