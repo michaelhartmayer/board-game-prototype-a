@@ -6,12 +6,6 @@
     <!-- CSS: Globals -->
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
 
-    <!-- CSS: Page -->
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-
-    <!-- CSS: Modals -->
-    <link rel="stylesheet" type="text/css" href="css/modals/inputmodal.css" />
-
     <!-- CSS: GameField -->
     <link rel="stylesheet" type="text/css" href="css/gamefield.css" />    
 
