@@ -28,7 +28,7 @@
     <script type="text/javascript" src="js/helper/event.js"></script>
 
     <!-- JS: Game Dependencies -->
-    <script type="text/javascript" src="js/modals/gamejoindialog.js"></script>
+    <script type="text/javascript" src="js/modals/gamejoin.js"></script>
     <script type="text/javascript" src="js/gamefield.js"></script>
     <script type="text/javascript" src="js/listplayers.js"></script>
     <script type="text/javascript" src="js/listgames.js"></script>

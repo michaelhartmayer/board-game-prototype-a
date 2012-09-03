@@ -1,24 +1,28 @@
-Machinespark.GameJoin = function () {
-  var _self = this;
-  
-  // Modal: GameJoin
-  _self.jqGameJoin           = $('#gamejoin');
-  _self.jqGameJoin_btnPlay   = $('#btnPlay');
-  _self.jqGameJoin.modal();
+/*
+  Exposed Events:
+    - onPlay (name)
+*/
+Machinespark.GameJoin = function () {  
+  this.jqGameJoin  = $('#gamejoin');
+  this.jqNameField = this.jqGameJoin.find('.txtname');
 
-  _self.jqGameJoin.hide();
+  this.jqGameJoin.modal();
 
-  function tryPlay (e) {
-    var txtSessionID  = $('#txtSessionID').val(),
-        txtAlias      = $('#txtAlias').val()
+  // Exposed Events
+  this.onPlay = new Machinespark.Event();
 
-    if (!txtSessionID || !txtAlias) return false;
+  // Button Click: Play
+  this.jqGameJoin.find('.btnplay').live('click', function (e) {
+    if (!this.jqNameField.val().length) {
+      alert('Who are you? <3');
+    }
+    this.onPlay.fire(this.jqNameField.val());
+  }.bind(this));
 
-    _self.session = Machinespark.GameSession(txtSessionID, txtAlias);
-    _self.jqGameJoin.hide();
+  return this;
+};
 
-    Machinespark.ThrobberToggle().on();
-  }
-
-  _self.jqGameJoin_btnPlay.live('click', tryPlay);
+Machinespark.GameJoin.prototype.hide = function () {
+  this.jqGameJoin.hide();
+  return this;
 };
