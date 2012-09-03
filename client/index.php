@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
 
     <!-- CSS: Modals -->
-    <link rel="stylesheet" type="text/css" href="css/modals/gamejoin.css" />
+    <link rel="stylesheet" type="text/css" href="css/modals/inputmodal.css" />
 
     <!-- CSS: GameField -->
     <link rel="stylesheet" type="text/css" href="css/gamefield.css" />    
@@ -30,8 +30,11 @@
     <!-- JS: Core -->
     <script type="text/javascript" src="js/core.js"></script>
 
+    <!-- JS: Helpers -->
+    <script type="text/javascript" src="js/helper/event.js"></script>
+
     <!-- JS: Game Dependencies -->
-    <script type="text/javascript" src="js/modals/gamejoin.js"></script>
+    <script type="text/javascript" src="js/modals/gamejoindialog.js"></script>
     <script type="text/javascript" src="js/gamefield.js"></script>
 
     <!-- JS: App -->

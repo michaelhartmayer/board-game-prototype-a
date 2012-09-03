@@ -1,17 +1,13 @@
 <!-- View: GameJoin -->
-<div id="gamejoin" class="devmodal">
+<div id="gamejoin" class="inputmodal">
   <div class="title">Join Game</div>
   <div class="options">
     <div class="option">
-      Session ID:<br />
-      <input type="text" id="txtSessionID" />
-    </div>
-    <div class="option">
-      Alias:<br />
-      <input type="text" id="txtAlias" /><br />
+      Your Name:<br />
+      <input type="text" class="txtname" value="Anonymous" /><br />
     </div>
   </div>
   <div class="resolution">
-    <button id="btnPlay">Join</button>
+    <button class="btnplay">- Play -</button>
   </div>
 </div>

@@ -1,4 +1,5 @@
 #gamefield {
+  display: none;
   width: 1024px;
   height: 768px;
   background: url("../images/board/background.jpg") no-repeat;
