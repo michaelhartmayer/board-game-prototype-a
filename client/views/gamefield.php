@@ -33,7 +33,6 @@
   <!-- UI: Selection -->
   <div id="selection"></div>
   <script id="tmpl_selection" type="text/x-handlebars-template">
-    
   </script>
 
   <!-- UI: Board -->

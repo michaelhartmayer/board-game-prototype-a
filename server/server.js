@@ -61,9 +61,16 @@ var Client = function (s) {
 
   // on: listgames
   s.on('listgames', function () {
-    s.emit('listgames', {
-      'listgames': games
-    })
+    var all_games = [];
+
+    for (game in games) {
+      all_games.push({
+        'name': players[player].name,
+        'id':   players[player].id
+      });
+    }
+
+    s.emit('listplayers', { 'players': all_players });
   });
 
   // on: listplayers
@@ -72,7 +79,8 @@ var Client = function (s) {
 
     for (player in players) {
       all_players.push({
-        'name': players[player].name
+        'name': players[player].name,
+        'id':   players[player.id]
       });
     }
 

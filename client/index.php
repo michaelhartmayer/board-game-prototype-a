@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Game Prototype</title>
+    <title>Game Prototype - A</title>
 
     <!-- CSS: Globals -->
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
@@ -36,6 +36,8 @@
     <!-- JS: Game Dependencies -->
     <script type="text/javascript" src="js/modals/gamejoindialog.js"></script>
     <script type="text/javascript" src="js/gamefield.js"></script>
+    <script type="text/javascript" src="js/listplayers.js"></script>
+    <script type="text/javascript" src="js/listgames.js"></script>
 
     <!-- JS: App -->
     <script type="text/javascript" src="js/app.js"></script>
@@ -43,5 +45,7 @@
   <body>
     <?php include('views/modals/gamejoin.php'); ?>
     <?php include('views/gamefield.php'); ?>
+    <?php include('views/listgames.php'); ?>
+    <?php include('views/listplayers.php'); ?>
   </body>
 </html>
