@@ -7,5 +7,5 @@ Machinespark.Event.prototype.subscribe = function (fn) {
 };
  
 Machinespark.Event.prototype.fire = function () {
-  for (var i in this.f) this.f[i](arguments);
+  for (var i in this.f) this.f[i].apply(undefined, arguments);
 };

@@ -1,8 +1,9 @@
 <!-- View: ListGames -->
-<div class="listgames">
-    - List Games -
-</div>
-<script id="tmpl_selection" type="text/x-handlebars-template">
+<div id="listgames"></div>
+
+<!-- Template: ListGames -->
+<script id="tmpl_listgames" type="text/x-handlebars-template">
+  <div>List Games</div>
   <ul>
     {{#each games}}
       <li data-gameid="{{id}}">{{name}}</li>

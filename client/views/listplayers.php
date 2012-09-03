@@ -1,6 +1,7 @@
 <!-- View: ListPlayers -->
-<div id="listplayers">
-</div>
+<div id="listplayers"></div>
+
+<!-- Template: ListPlayers -->
 <script id="tmpl_listplayers" type="text/x-handlebars-template">
   <ul>
     {{#each players}}

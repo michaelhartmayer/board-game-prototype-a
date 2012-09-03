@@ -16,6 +16,7 @@ Machinespark.GameJoin = function () {
     if (!this.jqNameField.val().length) {
       alert('Who are you? <3');
     }
+
     this.onPlay.fire(this.jqNameField.val());
   }.bind(this));
 

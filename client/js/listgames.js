@@ -1,15 +1,15 @@
 Machinespark.ListGames = function () {
   this.jqListGames    = $('#listgames');
   this.tmplListGames  = $('#tmpl_listgames');
-  this.hbListGames    = Handlebars.compile(this.tmplListGames);
-
-  this.jqListGames.modal();
+  this.hbListGames    = Handlebars.compile(this.tmplListGames.html());
 
   return this;
 };
 
 Machinespark.ListGames.prototype.updateList = function (o) {
-  this.hbListGames(o);
+  if (!o.games.length) return false;
+  this.jqListGames.html(this.hbListGames(o));
+
   return this;
 };
 

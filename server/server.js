@@ -30,61 +30,52 @@ var games     = {},
 var Client = function (s) {
   this.s          = s;
   this.name       = undefined;
+  this.id         = s.id;
   this.registered = false;
 
   var _self = this;
 
-  // on: register
-  s.on('register', function (jres) {
-    if (jres && jres.name) {
-      _self.name        = jres.name;
-      _self.registered  = true;
-      players[s.id]     = _self
-
-      s.emit('register', { valid: true });
-      return;
-    }
-
-    s.emit('register', {
-      valid:    false,
-      message:  'You must specify a name.'
-    });
-    return;
-  });
-
   // on: disconnect
-  s.on('diconnect', function () {
+  s.on('disconnect', function () {
     if (_self.registered) {
       delete players[s.id];
+
+      var all_players = listplayers();
+      broadcast('listplayers', all_players);
     }
   });
 
   // on: listgames
-  s.on('listgames', function () {
+  function listgames () {
     var all_games = [];
 
     for (game in games) {
       all_games.push({
-        'name': players[player].name,
-        'id':   players[player].id
+        'name': games[game].name,
+        'id':   games[game].id
       });
     }
 
-    s.emit('listplayers', { 'players': all_players });
-  });
+    s.emit('games', { 'games': all_games });
+  }
+  s.on('listgames', listgames);
 
   // on: listplayers
-  s.on('listplayers', function () {
+  function listplayers () {
     var all_players = [];
 
     for (player in players) {
       all_players.push({
         'name': players[player].name,
-        'id':   players[player.id]
+        'id':   players[player].id
       });
     }
 
-    s.emit('listplayers', { 'players': all_players });
+    return { 'players': all_players };
+  }
+
+  s.on('listplayers', function () {
+    s.emit('listplayers', listplayers());
   });
 
   // on: joingame
@@ -99,6 +90,35 @@ var Client = function (s) {
       message:  'Unable to join game.'
     });
   });
+
+  // broadcast to all
+  var broadcast = function (t, o) {
+    for (player in players) {
+      players[player].s.emit(t, o);
+    }
+  };
+
+  // on: register
+  s.on('register', function (jres) {
+    if (jres && jres.name) {
+      _self.name        = jres.name;
+      _self.registered  = true;
+      players[s.id]     = _self;
+
+      s.emit('register', { valid: true });
+      
+      var all_players = listplayers();
+      broadcast('listplayers', all_players);
+
+      return;
+    }
+
+    s.emit('register', {
+      valid:    false,
+      message:  'You must specify a name.'
+    });
+  });
+
 };
 
 // connection state
