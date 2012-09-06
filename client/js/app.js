@@ -72,9 +72,16 @@ Machinespark.GameClient.prototype.setup = function () {
     console.log(jres);
   });
 
-  // Register / Play Dialog
+  // event: onplay
   this.gameJoin.onPlay.subscribe(function (name) {
+    console.log('(register)', name);
     this.gameserver.emit('register', { 'name': name });
+  }.bind(this));
+
+  // event: onregister
+  this.listPlayers.onMakeGame.subscribe(function (opponent_id) {
+    console.log('(makegame)', opponent_id);
+    this.gameserver.emit('makegame', { 'opponent_id': opponent_id });
   }.bind(this));
 };
 

@@ -73,13 +73,23 @@ var Session = function (s) {
     s.emit('listplayers', listplayers());
   });
 
-  // on: joingame
-  s.on('joingame', function (jres) {
-    if (jres && jres.gameid) {
+  // on: makegame
+  s.on('makegame', function (jres) {
+    console.log('>>>>>', s.id);
+    console.log('!!!!!', jres);
+
+    if (jres && jres.opponent_id) {
+      // same player?
+      if (jres.opponent_id == s.id) {
+        s.emit('makegame', {
+          valid:    false,
+          message:  'You cant play with yourself!'
+        });
+      }
       return;
     }
 
-    s.emit('joingame', {
+    s.emit('makegame', {
       valid:    false,
       message:  'Unable to join game.'
     });
