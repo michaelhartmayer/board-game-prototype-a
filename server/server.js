@@ -4,30 +4,50 @@
     For reasons of redundancy, I have not included my node_modules folder
 */
 
-// dependencies
+// socket.io - listen
 var io = require('socket.io').listen(8011);
-
-// observer
-/* // don't need this yet..
-var Event = function () {
-  this.f = [];
-};
- 
-Event.prototype.subscribe = function (fn) {
-  this.f.push(fn);
-};
- 
-Event.prototype.fire = function () {
-  for (var i in this.f) this.f[i](arguments);
-};
-*/
 
 // application state
 var games     = {},
     players   = {};
 
-// client
-var Client = function (s) {
+// helper: list all players, returns json object
+function listplayers () {
+  var all_players = [];
+
+  for (player in players) {
+    all_players.push({
+      'name': players[player].name,
+      'id':   players[player].id
+    });
+  }
+
+  return { 'players': all_players };
+}
+
+// helper: list all games, returns json object
+function listgames () {
+  var all_games = [];
+
+  for (game in games) {
+    all_games.push({
+      'name': games[game].name,
+      'id':   games[game].id
+    });
+  }
+
+  return { 'games': all_games };
+}
+
+// helper: broadcast to all
+function broadcast (t, o) {
+  for (player in players) {
+    players[player].s.emit(t, o);
+  }
+};
+
+// class: session
+var Session = function (s) {
   this.s          = s;
   this.name       = undefined;
   this.id         = s.id;
@@ -39,43 +59,18 @@ var Client = function (s) {
   s.on('disconnect', function () {
     if (_self.registered) {
       delete players[s.id];
-
-      var all_players = listplayers();
-      broadcast('listplayers', all_players);
+      broadcast('listplayers', listplayers);
     }
   });
 
   // on: listgames
-  function listgames () {
-    var all_games = [];
-
-    for (game in games) {
-      all_games.push({
-        'name': games[game].name,
-        'id':   games[game].id
-      });
-    }
-
-    s.emit('games', { 'games': all_games });
-  }
-  s.on('listgames', listgames);
+  s.on('listgames', function () {
+    s.emit('listgames', listgames)
+  });
 
   // on: listplayers
-  function listplayers () {
-    var all_players = [];
-
-    for (player in players) {
-      all_players.push({
-        'name': players[player].name,
-        'id':   players[player].id
-      });
-    }
-
-    return { 'players': all_players };
-  }
-
   s.on('listplayers', function () {
-    s.emit('listplayers', listplayers());
+    s.emit('listplayers', listplayers);
   });
 
   // on: joingame
@@ -91,13 +86,6 @@ var Client = function (s) {
     });
   });
 
-  // broadcast to all
-  var broadcast = function (t, o) {
-    for (player in players) {
-      players[player].s.emit(t, o);
-    }
-  };
-
   // on: register
   s.on('register', function (jres) {
     if (jres && jres.name) {
@@ -106,9 +94,7 @@ var Client = function (s) {
       players[s.id]     = _self;
 
       s.emit('register', { valid: true });
-      
-      var all_players = listplayers();
-      broadcast('listplayers', all_players);
+      broadcast('listplayers', listplayers);
 
       return;
     }
@@ -123,5 +109,5 @@ var Client = function (s) {
 
 // connection state
 io.sockets.on('connection', function (s) {
-  new Client(s);
+  new Session(s);
 });
