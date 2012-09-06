@@ -54,19 +54,21 @@ Machinespark.GameClient.prototype.setup = function () {
   // on: listplayers
   this.listPlayers = new Machinespark.ListPlayers();
   this.gameserver.on('listplayers', function (jres) {
-    console.log(jres)
+    console.log('[listplayers]', jres);
     this.listPlayers.updateList(jres);
   }.bind(this));
 
   // on: listgames
   this.listGames = new Machinespark.ListGames();
   this.gameserver.on('listgames', function (jres) {
+    return;
+    console.log('[listgames]', jres);
     this.listGames.updateList(jres);
   });
 
   // on: test (for dev only)
   this.gameserver.on('test', function (jres) {
-    console.log('TEST APPEARED!');
+    console.log('[test]', jres);
     console.log(jres);
   });
 

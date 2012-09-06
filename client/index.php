@@ -7,7 +7,9 @@
     <link rel="stylesheet" type="text/css" href="css/globals.css" />
 
     <!-- CSS: GameField -->
-    <link rel="stylesheet" type="text/css" href="css/gamefield.css" />    
+    <link rel="stylesheet" type="text/css" href="css/gamefield.css" />
+    <link rel="stylesheet" type="text/css" href="css/listplayers.css" />
+    <link rel="stylesheet" type="text/css" href="css/listgames.css" />
 
     <!-- JS: Node w/ Socket.io -->
     <script src="http://76.176.40.244:8011/socket.io/socket.io.js"></script>

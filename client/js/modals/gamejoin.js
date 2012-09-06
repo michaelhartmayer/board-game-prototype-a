@@ -6,7 +6,7 @@ Machinespark.GameJoin = function () {
   this.jqGameJoin  = $('#gamejoin');
   this.jqNameField = this.jqGameJoin.find('.txtname');
 
-  this.jqGameJoin.show()//.modal();
+  this.jqGameJoin.modal();
 
   // Exposed Events
   this.onPlay = new Machinespark.Event();

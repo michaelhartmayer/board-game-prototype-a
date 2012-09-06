@@ -59,24 +59,23 @@ var Session = function (s) {
   s.on('disconnect', function () {
     if (_self.registered) {
       delete players[s.id];
-      broadcast('listplayers', listplayers);
+      broadcast('listplayers', listplayers());
     }
   });
 
   // on: listgames
   s.on('listgames', function () {
-    s.emit('listgames', listgames)
+    s.emit('listgames', listgames());
   });
 
   // on: listplayers
   s.on('listplayers', function () {
-    s.emit('listplayers', listplayers);
+    s.emit('listplayers', listplayers());
   });
 
   // on: joingame
   s.on('joingame', function (jres) {
     if (jres && jres.gameid) {
-
       return;
     }
 
@@ -94,7 +93,7 @@ var Session = function (s) {
       players[s.id]     = _self;
 
       s.emit('register', { valid: true });
-      broadcast('listplayers', listplayers);
+      broadcast('listplayers', listplayers());
 
       return;
     }
