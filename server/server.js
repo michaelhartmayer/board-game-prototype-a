@@ -46,12 +46,22 @@ function broadcast (emit, message) {
   }
 };
 
+// helper: special node log
+function nlog () {
+  console.log("\n\n\n\n\n\n ---------------------------------------------- \n\n");
+  for (arg in arguments) {
+    console.log(arguments[arg], '\n\n');
+  }
+  console.log("\n\n ---------------------------------------------- \n\n");
+};
+
 // class: session
 var Session = function (s) {
-  this.s          = s;
-  this.name       = undefined;
-  this.id         = s.id;
-  this.registered = false;
+  this.s              = s;
+  this.name           = undefined;
+  this.id             = s.id;
+  this.registered     = false;
+  this.ag             = undefined;
 
   var _self = this;
 
@@ -73,6 +83,12 @@ var Session = function (s) {
     s.emit('listplayers', listplayers());
   });
 
+  // on: gameupdate
+  s.on('gameupdate', function (jres) {
+    var ag = games[jres.token];
+    ag.update(jres);
+  });
+
   // on: makegame
   s.on('makegame', function (jres) {
     if (jres && jres.opponent_id) {
@@ -86,7 +102,9 @@ var Session = function (s) {
       }
 
       // ok: make a game
-      new GameSession(players[s.id], players[jres.opponent_id]);
+      var ag = new GameSession(players[s.id], players[jres.opponent_id]);
+      games[ag.token] = ag;
+      nlog('made game with token: ', ag.token);
       return;
     }
 
@@ -106,9 +124,6 @@ var Session = function (s) {
       s.emit('register', { valid: true });
       broadcast('listplayers', listplayers());
 
-      console.log("CONNECTION REGISTERED: EMITTING:")
-      console.log(listplayers());
-
       return;
     }
 
@@ -122,20 +137,28 @@ var Session = function (s) {
 // -----------------------------------------------------------
 // class: gamesession
 var GameSession = function (client_initiator, client_target) {
-  this.token    = client_initiator.s.id + (Math.random() * 10000) + client_target.s.id;
-  
-  // emit to players in game session
-  function emit_players (emit, message) {
-    client_initiator.s.emit(emit, message);
-    client_target.s.emit(emit, message);
-  }
+  // session state
+  this.client_initiator = client_initiator;
+  this.client_target    = client_target;
+  this.token            = client_initiator.s.id + (Math.random() * 10000) + client_target.s.id;
 
-  emit_players('makegame', {
+  // emit to players in game, game is ready
+  this.emit_players('makegame', {
     valid:    true,
     token:    this.token
   });
 }
 
+GameSession.prototype.emit_players = function (emit, message) {
+  this.client_initiator.s.emit(emit, message);
+  this.client_target.s.emit(emit, message);
+};
+
+GameSession.prototype.update = function (jres) {
+  console.log( '!!!!! GAME UPDATE RECEIVED !!!!!' );
+}
+
+// -----------------------------------------------------------
 // connection state
 io.sockets.on('connection', function (s) {
   new Session(s);
