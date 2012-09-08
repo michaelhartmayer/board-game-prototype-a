@@ -40,9 +40,9 @@ function listgames () {
 }
 
 // helper: broadcast to all
-function broadcast (t, o) {
+function broadcast (emit, message) {
   for (player in players) {
-    players[player].s.emit(t, o);
+    players[player].s.emit(emit, message);
   }
 };
 
@@ -75,9 +75,6 @@ var Session = function (s) {
 
   // on: makegame
   s.on('makegame', function (jres) {
-    console.log('>>>>>', s.id);
-    console.log('!!!!!', jres);
-
     if (jres && jres.opponent_id) {
       // same player?
       if (jres.opponent_id == s.id) {
@@ -85,7 +82,11 @@ var Session = function (s) {
           valid:    false,
           message:  'You cant play with yourself!'
         });
+        return;
       }
+
+      // ok: make a game
+      new GameSession(players[s.id], players[jres.opponent_id]);
       return;
     }
 
@@ -105,6 +106,9 @@ var Session = function (s) {
       s.emit('register', { valid: true });
       broadcast('listplayers', listplayers());
 
+      console.log("CONNECTION REGISTERED: EMITTING:")
+      console.log(listplayers());
+
       return;
     }
 
@@ -113,8 +117,24 @@ var Session = function (s) {
       message:  'You must specify a name.'
     });
   });
-
 };
+
+// -----------------------------------------------------------
+// class: gamesession
+var GameSession = function (client_initiator, client_target) {
+  this.token    = client_initiator.s.id + (Math.random() * 10000) + client_target.s.id;
+  
+  // emit to players in game session
+  function emit_players (emit, message) {
+    client_initiator.s.emit(emit, message);
+    client_target.s.emit(emit, message);
+  }
+
+  emit_players('makegame', {
+    valid:    true,
+    token:    this.token
+  });
+}
 
 // connection state
 io.sockets.on('connection', function (s) {

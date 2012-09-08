@@ -14,6 +14,11 @@ Machinespark.GameField = function () {
 
   // reset field
   this.clearField();
+  this.show();
+};
+
+Machinespark.GameField.prototype.show = function () {
+  this.jqGameField.show();
 };
 
 Machinespark.GameField.prototype.updateStatus = function (o) {
@@ -62,24 +67,3 @@ Machinespark.GameField.prototype.clearField = function () {
 
   this.updateBoard({ board: board });
 };
-
-$(function () {
-  var oGameField = new Machinespark.GameField();
-
-  // demo status
-  oGameField.updateStatus({
-    player: {
-      name: 'Michael',
-      chp:   30,
-      mhp:   30
-    },
-    opponent: {
-      name: 'Some Guy',
-      chp:   30,
-      mhp:   30
-    },
-    turn: {
-      player_name: 'Michael'
-    }
-  });
-});

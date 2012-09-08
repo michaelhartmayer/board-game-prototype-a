@@ -1,10 +1,11 @@
 #gamefield {
-  display: none;
   width: 1024px;
   height: 768px;
   background: url("../images/board/background.jpg") no-repeat;
-  margin: 20px auto 0;
-  position: relative; }
+  position: absolute;
+  left: 300px;
+  top: 20px;
+  display: none; }
   #gamefield #status {
     position: absolute;
     right: 0;

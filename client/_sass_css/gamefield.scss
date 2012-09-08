@@ -2,8 +2,10 @@
   width: 1024px;
   height: 768px;
   background: url('../images/board/background.jpg') no-repeat;
-  margin: 20px auto 0;
-  position: relative;
+  position: absolute;
+  left: 300px;
+  top: 20px;
+  display: none;
 
   #status {
     position: absolute;

@@ -51,6 +51,14 @@ Machinespark.GameClient.prototype.setup = function () {
     }
   }.bind(this));
 
+  // on: makegame
+  this.gameserver.on('makegame', function (jres) {
+    console.log('[makegame]', jres);
+    
+    Machinespark.oGameField = new Machinespark.GameField();
+    
+  }.bind(this));
+
   // on: listplayers
   this.listPlayers = new Machinespark.ListPlayers();
   this.gameserver.on('listplayers', function (jres) {
